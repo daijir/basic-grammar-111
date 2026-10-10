@@ -113,6 +113,7 @@ const flashcards = [
 ];
 
 const flashcardContainer = document.querySelector("#flashcards");
+let activeEnglishCard = null;
 
 for (const flashcard of flashcards) {
   const button = document.createElement("button");
@@ -129,9 +130,25 @@ for (const flashcard of flashcards) {
 
   button.addEventListener("click", () => {
     const showingEnglish = button.getAttribute("aria-pressed") === "true";
-    button.setAttribute("aria-pressed", String(!showingEnglish));
-    text.lang = showingEnglish ? "ja" : "en";
-    text.textContent = showingEnglish ? flashcard.ja : flashcard.en;
+
+    if (showingEnglish) {
+      button.setAttribute("aria-pressed", "false");
+      text.lang = "ja";
+      text.textContent = flashcard.ja;
+      activeEnglishCard = null;
+      return;
+    }
+
+    if (activeEnglishCard) {
+      activeEnglishCard.button.setAttribute("aria-pressed", "false");
+      activeEnglishCard.text.lang = "ja";
+      activeEnglishCard.text.textContent = activeEnglishCard.ja;
+    }
+
+    button.setAttribute("aria-pressed", "true");
+    text.lang = "en";
+    text.textContent = flashcard.en;
+    activeEnglishCard = { button, text, ja: flashcard.ja };
   });
 
   flashcardContainer.append(button);

@@ -1,6 +1,6 @@
 # Basic Grammar 111
 
-A static Japanese-English flashcard page built with HTML, CSS, and vanilla JavaScript. Each card starts in Japanese and flips independently to English when activated.
+A static Japanese-English flashcard page built with HTML, CSS, and vanilla JavaScript. Each card starts in Japanese and flips to English when activated. When another card is activated, the previously open card returns to Japanese.
 
 ## Run locally
 
